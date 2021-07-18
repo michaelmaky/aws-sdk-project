@@ -1,0 +1,31 @@
+{
+  "name": "aws-sdk-project",
+  "version": "0.1.0",
+  "main": "index.ts",
+  "license": "MIT",
+  "scripts": {
+    "i": "yarn install --frozen-lockfile",
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
+    "build": "tsc --build",
+    "clean": "tsc --build --clean",
+    "start": "ts-node index.ts",
+    "start:LambdaAPI": "ts-node index.ts --lambda LambdaAPI"
+  },
+  "dependencies": {
+    "@aws-sdk/client-lambda": "^3.21.0",
+    "dotenv": "^10.0.0",
+    "global": "^4.4.0",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5",
+    "util": "^0.12.4"
+  },
+  "devDependencies": {
+    "@types/node": "^10.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.25.0",
+    "@typescript-eslint/parser": "^4.25.0",
+    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "prettier": "^2.3.0"
+  }
+}
