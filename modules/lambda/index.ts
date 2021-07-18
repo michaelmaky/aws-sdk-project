@@ -1,4 +1,6 @@
 const util = require('util');
+import ProxyAgent from 'proxy-agent';
+import { NodeHttpHandler } from '@aws-sdk/node-http-handler';
 import {
   LambdaClient,
   LambdaClientConfig,
@@ -12,11 +14,18 @@ import {
 
 export const updateSubnet = async () => {
   try {
-    const config: LambdaClientConfig = {
-      region: 'ap-southeast-1',
-    };
+    const config: LambdaClientConfig = {};
+    // base on proxy or local .aws credential
+    if (process.env.PROXY_AGENT) {
+      const proxyAgent = new ProxyAgent(process.env.PROXY_AGENT);
+      const requestHandler = new NodeHttpHandler({
+        httpAgent: proxyAgent,
+        httpsAgent: proxyAgent,
+      });
+    } else {
+      config.region = process.env.REGION || 'ap-southeast-1';
+    }
 
-    const REGION = 'REGION';
     const client = new LambdaClient(config);
 
     const params: ListFunctionsCommandInput = {
